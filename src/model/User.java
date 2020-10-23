@@ -7,7 +7,6 @@ public class User{
 	private int age;
 
  //Relations	
-
  //Constructor
 	public User (String name, String password, int age){
 		this.name=name;
@@ -31,6 +30,14 @@ public class User{
 
 	public void setPassword (String pPassword){
 		password=pPassword;
+	}
+
+		public int getAge (){
+		return age;
+	}	
+
+	public void setAge (int pAge){
+		age=pAge;
 	}
 
 

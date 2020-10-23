@@ -1,8 +1,8 @@
 package model;
 public class Mcs{
 	//Constant 
-	private final int MAX_USERS=20;
-	private final int MAX_SONGS=30;
+	public final int MAX_USERS=10;
+	public final int MAX_SONGS=30;
 	//Attribute
 	private User [] users;
 	private Song [] pool;
@@ -17,7 +17,7 @@ public class Mcs{
 	public Song findSong (String name){
 		Song objSearch=null;
 		boolean findSo=false;
-		for (int i=0;i<MAX_USERS && !findSo;i++){
+		for (int i=0;i<MAX_SONGS && !findSo;i++){
 			if (pool[i]!=null && pool[i].getTittle().equalsIgnoreCase(name)){
 				objSearch=pool[i];
 				findSo=true;	
@@ -29,7 +29,7 @@ public class Mcs{
 	public User findUser (String name){
 		User objSearch=null;
 		boolean findUs=false;
-		for (int i=0;i<MAX_SONGS && !findUs;i++){
+		for (int i=0;i<MAX_USERS && !findUs;i++){
 			if (users[i]!=null && users[i].getName().equalsIgnoreCase(name)){
 				objSearch=users[i];
 				findUs=true;	
@@ -46,9 +46,10 @@ public class Mcs{
 		if(objSearch!=null)
 			message="Error. the user already exist";
 		else{
-			for (int i=0;i<MAX_USERS;i++){
+			for (int i=0;i<MAX_USERS && !addUs;i++){
 				if (users[i]==null){
 					users[i]=new User (pName,pPassword,pAge);
+					addUs=true;
 					message="The user has been registered";
 				}
 			}
@@ -65,9 +66,10 @@ public class Mcs{
 		if(objSearch!=null)
 			message="Error. the song already exist";
 		else{
-			for (int i=0;i<MAX_SONGS;i++){
+			for (int i=0;i<MAX_SONGS && !addSo;i++){
 				if (pool[i]==null){
 					pool[i]=new Song (pName,pAuthor,pDuration);
+					addSo=true;
 					message="The song has been created";
 				}
 			}
@@ -76,5 +78,29 @@ public class Mcs{
 		}
 		return message;
 	}
+
+	  public String showUsers(int i){
+     String message="";
+              if(users[i] !=null){
+      message=("************* User ************ \n"
+      +"** UserName: "+(users[i].getName())+"\n"+
+      "** Age: "+(users[i].getAge())+"\n"
+      + "** Category: "+("falta")+"\n"
+      +"*******************************");
+     }
+     return message; 
+  }
+
+    public String showPool(int i){
+     String message="";
+              if(pool[i] !=null){
+      message=("************* Song ************ \n"
+      +"** Tittle: "+(pool[i].getTittle())+"\n"+
+      "** Artist: "+(pool[i].getAuthor())+"\n"
+      + "** Category: "+("falta")+"\n"
+      +"*******************************");
+     }
+     return message; 
+  }
 
 }

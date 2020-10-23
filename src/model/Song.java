@@ -22,6 +22,11 @@ public Song (String tittle, String author, int duration){
  public String getTittle (){
 		return tittle;
 	}	
-
+ public String getAuthor (){
+		return author;
+	}
+	 public int getDuration (){
+		return duration;
+	}
 
 }

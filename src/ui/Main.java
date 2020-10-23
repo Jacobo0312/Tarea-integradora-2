@@ -17,12 +17,11 @@
   	private Mcs app;
   	private Scanner lector;
 
-    public void createMcs(){
-      app= new Mcs();
-    }
+   
 
   	public Main(){
   		lector=new Scanner(System.in);
+      app= new Mcs();
   	}
   	public static void main(String [] args) {
 
@@ -68,6 +67,11 @@
   			createUser() ;
   			break;
   			case 2:
+        for (int i=0; i<app.MAX_USERS;i++){
+         System.out.println(app.showUsers(i)); 
+        }
+
+        
   			break;
   			case 3:
   			createSong();
@@ -79,6 +83,7 @@
   		}
   	}
 
+
   public void createUser(){
 
   	System.out.println("Enter your nickname");
@@ -86,8 +91,10 @@
   	System.out.println("Enter your password");
   	String password=lector.nextLine();
   	System.out.println("Enter you age");
-  	int age=lector.nextInt();lector.nextLine();
-  	app.addUser(name,password,age);
+  	int age=lector.nextInt();
+  	String message=app.addUser(name,password,age);
+    System.out.println(message);
+
 
   }
 
@@ -100,6 +107,8 @@
     int duration=lector.nextInt();lector.nextLine();
     app.addSong(name,author,duration);
   }
+
+
   
 
  
