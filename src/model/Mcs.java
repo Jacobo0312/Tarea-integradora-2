@@ -59,7 +59,9 @@ public class Mcs{
 		return message;
 	}
 
-	public String addSong (String pName, String pAuthor, int pDuration ){
+	public String addSong (String pName, String pAuthor, int pDuration, String pGenre,String pUser ){
+		User objUser=findUser(pUser);
+		objUser.addCounter();
 		String message="";
 		boolean addSo=false;
 		Song objSearch=findSong(pName);
@@ -68,7 +70,7 @@ public class Mcs{
 		else{
 			for (int i=0;i<MAX_SONGS && !addSo;i++){
 				if (pool[i]==null){
-					pool[i]=new Song (pName,pAuthor,pDuration);
+					pool[i]=new Song (pName,pAuthor,pDuration,pGenre);
 					addSo=true;
 					message="The song has been created";
 				}
@@ -82,10 +84,11 @@ public class Mcs{
 	  public String showUsers(int i){
      String message="";
               if(users[i] !=null){
+       users[i].updateCategory();
       message=("************* User ************ \n"
       +"** UserName: "+(users[i].getName())+"\n"+
       "** Age: "+(users[i].getAge())+"\n"
-      + "** Category: "+("falta")+"\n"
+      + "** Category: "+(users[i].getCategory())+"\n"
       +"*******************************");
      }
      return message; 
@@ -97,7 +100,8 @@ public class Mcs{
       message=("************* Song ************ \n"
       +"** Tittle: "+(pool[i].getTittle())+"\n"+
       "** Artist: "+(pool[i].getAuthor())+"\n"
-      + "** Category: "+("falta")+"\n"
+      + "** Genre: "+(pool[i].getGenre())+"\n"
+      +"** Duration: "+ (pool[i].convertDuration())
       +"*******************************");
      }
      return message; 

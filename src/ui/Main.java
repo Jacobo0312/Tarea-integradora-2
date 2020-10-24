@@ -70,13 +70,14 @@
         for (int i=0; i<app.MAX_USERS;i++){
          System.out.println(app.showUsers(i)); 
         }
-
-        
   			break;
   			case 3:
   			createSong();
   			break;
   			case 4:
+          for (int i=0; i<app.MAX_USERS;i++){
+         System.out.println(app.showPool(i)); 
+        }
   			break;
   			default:
   			System.out.println("Error...");
@@ -92,20 +93,24 @@
   	String password=lector.nextLine();
   	System.out.println("Enter you age");
   	int age=lector.nextInt();
-  	String message=app.addUser(name,password,age);
+    String message=app.addUser(name,password,age);
     System.out.println(message);
 
 
   }
 
   public void createSong(){
+    System.out.println("Enter your nickname");
+    String user=lector.nextLine();
     System.out.println("Enter song tittle");
     String name=lector.nextLine();
     System.out.println("Enter song author");
     String author=lector.nextLine();
     System.out.println("Enter song duration");
     int duration=lector.nextInt();lector.nextLine();
-    app.addSong(name,author,duration);
+    System.out.println("Enter song genre: ROCK, HIPHOP, CLASSIC, REGGAE, SALSA, METAL");
+    String genre=lector.nextLine().toUpperCase();
+    app.addSong(name,author,duration,genre,user);
   }
 
 
