@@ -3,14 +3,17 @@ public class Mcs{
 	//Constant 
 	public final int MAX_USERS=10;
 	public final int MAX_SONGS=30;
+	public final int MAX_PLAYLIST=20;
 	//Attribute
 	private User [] users;
 	private Song [] pool;
+	private Playlist [] playlist;
 
 	//Constructor 
 	public Mcs (){
 		users = new User [MAX_USERS];
 		pool = new Song [MAX_SONGS];
+		playlist = new Playlist [MAX_PLAYLIST];
 	}
 
 	//Methods
@@ -33,6 +36,18 @@ public class Mcs{
 			if (users[i]!=null && users[i].getName().equalsIgnoreCase(name)){
 				objSearch=users[i];
 				findUs=true;	
+			}
+		}
+		return objSearch;
+	}
+
+	public Playlist findPlaylist(String name){
+		Playlist objSearch=null;
+		boolean findPl=false;
+		for (int i=0;i<MAX_PLAYLIST && !findPl;i++){
+			if (playlist[i]!=null && playlist[i].getName().equalsIgnoreCase(name)){
+				objSearch=playlist[i];
+				findPl=true;
 			}
 		}
 		return objSearch;
@@ -81,6 +96,47 @@ public class Mcs{
 		return message;
 	}
 
+    public String addPlaylist (String pName){
+		String message="";
+		boolean addPl=false;
+		Playlist objSearch=findPlaylist(pName);
+		if(objSearch!=null)
+			message="Error. the playlist already exist";
+		else{
+			for (int i=0;i<MAX_PLAYLIST && !addPl;i++){
+				if (playlist[i]==null){
+					playlist[i]=new Playlist (pName);
+					addPl=true;
+					message="The playlist has been created";
+				}
+			}
+			if (addPl==false)
+				message="No more space to add playlist";
+		}
+		return message;
+	}
+
+	public String addSongtoPlaylist(String playlist, String namesong){
+		String message="";
+		boolean addSP=false;
+		Playlist objSearch=findPlaylist(playlist);
+		for (int i=0;i<objSearch.songs_playlist.length && !addSP;i++){
+			if (objSearch.songs_playlist[i]==null){
+				Song song=findSong(namesong);
+				objSearch.songs_playlist[i]=song;
+				addSP=true;
+				message="Song added successfully";
+			}
+		}
+		if (addSP==false)
+			message="No more space in playlist";
+		
+		return message;
+
+	}
+
+
+
 	  public String showUsers(int i){
      String message="";
               if(users[i] !=null){
@@ -106,5 +162,19 @@ public class Mcs{
      }
      return message; 
   }
+
+    public String showPlaylist(int i){
+     String message="";
+              if(playlist[i] !=null){
+      message=("************* Playlist ************ \n"
+      +"** Tittle: "+(playlist[i].getName())+"\n"
+      + "** Genre: "+("falta")+"\n"
+      +"** Duration: "+ (playlist[i].totalDuration())
+      +"***********************************");
+     }
+     return message; 
+  }
+
+
 
 }

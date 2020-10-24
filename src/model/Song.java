@@ -7,9 +7,10 @@ public class Song{
 private String tittle;
 private String author;
 private int duration;
-private Genre genre;
+
 
 //Relations
+private Genre genre;
 
 //Constructor
 public Song (String tittle, String author, int duration, String genre){

@@ -49,7 +49,8 @@
   			"(3) Add song to pool  \n"+
   			"(4) Show pool songs \n"+ 
         "(5) Create playlist \n"+
-        "(6) Show playlist \n" +
+        "(6) add songs to playlist \n"+
+        "(7) Show playlist \n" +
   			"(0) Para salir"
   			);
   		option= lector.nextInt();
@@ -79,6 +80,17 @@
          System.out.println(app.showPool(i)); 
         }
   			break;
+        case 5:
+        createPlaylist();
+        break;
+        case 6:
+        createSongtoPlaylist();
+        break;
+        case 7:
+        for (int i=0; i<app.MAX_PLAYLIST;i++){
+         System.out.println(app.showPlaylist(i)); 
+        }
+        break;
   			default:
   			System.out.println("Error...");
   		}
@@ -106,16 +118,31 @@
     String name=lector.nextLine();
     System.out.println("Enter song author");
     String author=lector.nextLine();
-    System.out.println("Enter song duration");
+    System.out.println("Enter song duration in seconds");
     int duration=lector.nextInt();lector.nextLine();
     System.out.println("Enter song genre: ROCK, HIPHOP, CLASSIC, REGGAE, SALSA, METAL");
     String genre=lector.nextLine().toUpperCase();
-    app.addSong(name,author,duration,genre,user);
+    String message=app.addSong(name,author,duration,genre,user);
+    System.out.println(message);
   }
 
 
-  
+  public void createPlaylist(){
+    System.out.println("Enter tittle of the playlist");
+    String tittle=lector.nextLine();
+    app.addPlaylist(tittle);
+  }
 
- 
+  public void createSongtoPlaylist(){
+    System.out.println("Enter name of the playlist");
+    String playlist=lector.nextLine();
+    System.out.println("Enter name of the song");
+    String song=lector.nextLine();
+    String message=app.addSongtoPlaylist(playlist,song);
+    System.out.println(message);
+   
+  }
+
+
 
   }
