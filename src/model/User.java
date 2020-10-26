@@ -37,7 +37,7 @@ public class User{
 		password=pPassword;
 	}
 
-		public int getAge (){
+	public int getAge (){
 		return age;
 	}	
 
@@ -50,11 +50,11 @@ public class User{
 	}
 
 	public int getCounter(){
-     return counter;
+		return counter;
 	}
 
 	public void setCounter(int pCounter){
-     counter=pCounter;
+		counter=pCounter;
 	}
 
 	
@@ -63,20 +63,20 @@ public class User{
 	public void addCounter(){
 		counter++;
 	}
-     
+	
 
-   public void updateCategory(){
-    
-    if (counter <= 3){}
-    else if (counter > 3 && counter <=10){
-    	category=Category.LITTLE_CONTRIBUTOR;
-    } else {
-    	if (counter > 10 && counter <=30)
-    	category=Category.MILD_CONTRIBUTOR;
-    else
-    	category=Category.STAR_CONTRIBUTOR;
+	public void updateCategory(){
+		
+		if (counter <= 3){}
+			else if (counter > 3 && counter <=10){
+				category=Category.LITTLE_CONTRIBUTOR;
+			} else {
+				if (counter > 10 && counter <=30)
+					category=Category.MILD_CONTRIBUTOR;
+				else
+					category=Category.STAR_CONTRIBUTOR;
 
-   }
-}
+			}
+		}
 
-}
+	}

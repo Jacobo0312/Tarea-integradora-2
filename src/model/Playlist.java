@@ -8,8 +8,9 @@ public class Playlist{
 	private int duration;
 
  //Relations
-   public Song [] songs_playlist;
- 
+	
+	public Song [] songs_playlist;
+	
  //Getters and setters
 	public String getName(){
 		return name;
@@ -20,7 +21,7 @@ public class Playlist{
 	}
 
 
- 
+	
  //Constructor 
 	public Playlist (String name){
 		this.name=name;
@@ -30,20 +31,29 @@ public class Playlist{
 
 	//Methods
 	public String totalDuration(){
-      int total=0;
-      for (int i=0;i<MAX_SONGS_PLAYLIST;i++){
-      if (songs_playlist[i] !=null)
-      	total+=songs_playlist[i].getDuration();
-      }
+		int total=0;
+		for (int i=0;i<MAX_SONGS_PLAYLIST;i++){
+			if (songs_playlist[i] !=null)
+				total+=songs_playlist[i].getDuration();
+		}
 		int num=0,hor=0,min=0,seg=0;
-        String message="";
-        num=total;
-        min=num/60;
-        seg=num-(min*60);
-    
-    message=(": "+min+"m "+seg+"s\n");
-    return message;
+		String message="";
+		num=total;
+		min=num/60;
+		seg=num-(min*60);
+		
+		message=(": "+min+"m "+seg+"s\n");
+		return message;
 	}
 
+
+	public String showGenre(){
+		String genres="";
+		for (int i=0;i<MAX_SONGS_PLAYLIST;i++){
+			if (songs_playlist[i] !=null)
+				genres+=((songs_playlist[i].getGenre())+("; "));
+		}
+		return genres;
+	}
 
 }

@@ -52,7 +52,7 @@ public class Mcs{
 		}
 		return objSearch;
 	}
-    
+
 
 	public String addUser (String pName, String pPassword, int pAge ){
 		String message="";
@@ -96,16 +96,16 @@ public class Mcs{
 		return message;
 	}
 
-    public String addPlaylist (String pName){
+	public String addPlaylist (String tittle){
 		String message="";
 		boolean addPl=false;
-		Playlist objSearch=findPlaylist(pName);
+		Playlist objSearch=findPlaylist(tittle);
 		if(objSearch!=null)
 			message="Error. the playlist already exist";
 		else{
 			for (int i=0;i<MAX_PLAYLIST && !addPl;i++){
 				if (playlist[i]==null){
-					playlist[i]=new Playlist (pName);
+					playlist[i]=new Public (tittle);
 					addPl=true;
 					message="The playlist has been created";
 				}
@@ -115,6 +115,48 @@ public class Mcs{
 		}
 		return message;
 	}
+	
+	public String addPlaylist (String tittle, String pName){
+		String message="";
+		boolean addPl=false;
+		Playlist objSearch=findPlaylist(tittle);
+		if(objSearch!=null)
+			message="Error. the playlist already exist";
+		else{
+			for (int i=0;i<MAX_PLAYLIST && !addPl;i++){
+				if (playlist[i]==null){
+					playlist[i]=new Private (tittle, pName);
+					addPl=true;
+					message="The playlist has been created";
+				}
+			}
+			if (addPl==false)
+				message="No more space to add playlist";
+		}
+		return message;
+	}
+
+	public String addPlaylist (String tittle, String [] members){
+		String message="";
+		boolean addPl=false;
+		Playlist objSearch=findPlaylist(tittle);
+		if(objSearch!=null)
+			message="Error. the playlist already exist";
+		else{
+			for (int i=0;i<MAX_PLAYLIST && !addPl;i++){
+				if (playlist[i]==null){
+					playlist[i]=new Restricted (tittle, members);
+					addPl=true;
+					message="The playlist has been created";
+				}
+			}
+			if (addPl==false)
+				message="No more space to add playlist";
+		}
+		return message;
+	}
+
+
 
 	public String addSongtoPlaylist(String playlist, String namesong){
 		String message="";
@@ -137,43 +179,43 @@ public class Mcs{
 
 
 
-	  public String showUsers(int i){
-     String message="";
-              if(users[i] !=null){
-       users[i].updateCategory();
-      message=("************* User ************ \n"
-      +"** UserName: "+(users[i].getName())+"\n"+
-      "** Age: "+(users[i].getAge())+"\n"
-      + "** Category: "+(users[i].getCategory())+"\n"
-      +"*******************************");
-     }
-     return message; 
-  }
+	public String showUsers(int i){
+		String message="";
+		if(users[i] !=null){
+			users[i].updateCategory();
+			message=("************* User ************ \n"
+				+"** UserName: "+(users[i].getName())+"\n"+
+				"** Age: "+(users[i].getAge())+"\n"
+				+ "** Category: "+(users[i].getCategory())+"\n"
+				+"*******************************");
+		}
+		return message; 
+	}
 
-    public String showPool(int i){
-     String message="";
-              if(pool[i] !=null){
-      message=("************* Song ************ \n"
-      +"** Tittle: "+(pool[i].getTittle())+"\n"+
-      "** Artist: "+(pool[i].getAuthor())+"\n"
-      + "** Genre: "+(pool[i].getGenre())+"\n"
-      +"** Duration: "+ (pool[i].convertDuration())
-      +"*******************************");
-     }
-     return message; 
-  }
+	public String showPool(int i){
+		String message="";
+		if(pool[i] !=null){
+			message=("************* Song ************ \n"
+				+"** Tittle: "+(pool[i].getTittle())+"\n"+
+				"** Artist: "+(pool[i].getAuthor())+"\n"
+				+ "** Genre: "+(pool[i].getGenre())+"\n"
+				+"** Duration: "+ (pool[i].convertDuration())
+				+"*******************************");
+		}
+		return message; 
+	}
 
-    public String showPlaylist(int i){
-     String message="";
-              if(playlist[i] !=null){
-      message=("************* Playlist ************ \n"
-      +"** Tittle: "+(playlist[i].getName())+"\n"
-      + "** Genre: "+("falta")+"\n"
-      +"** Duration: "+ (playlist[i].totalDuration())
-      +"***********************************");
-     }
-     return message; 
-  }
+	public String showPlaylist(int i){
+		String message="";
+		if(playlist[i] !=null){
+			message=("************* Playlist ************ \n"
+				+"** Tittle: "+(playlist[i].getName())+"\n"
+				+ "** Genre: "+(playlist[i].showGenre())+"\n"
+				+"** Duration: "+ (playlist[i].totalDuration())
+				+"***********************************");
+		}
+		return message; 
+	}
 
 
 
