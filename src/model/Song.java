@@ -51,4 +51,17 @@ public Song (String tittle, String author, int duration, String genre){
 
 
 
+	public String toString(){
+		String message="";
+		message=("\n************* Song ************ \n"
+				+"** Tittle: "+tittle+"\n"+
+				"** Artist: "+author+"\n"
+				+ "** Genre: "+genre+"\n"
+				+"** Duration: "+ (convertDuration())
+				+"*******************************");
+		return message;
+	}
+
+
+
 }

@@ -26,6 +26,25 @@
     public static void main(String [] args) {
 
       System.out.println("Starting...");
+      System.out.println("\n(((((((((((((((((((((((((((((((((((((((((((((((((\n"+
+"((((((((((((((((/((((((((((((((((((((((((((((((((\n"+
+"(((/  .(((((((*  .((((((*        (((((/      /(((\n"+
+"(((/   .((((((.  .(((((   ,((((((((((*  .((((((((\n"+
+"(((/    /((((/   .((((/  ,(((((((((((.  /((((((((\n"+
+"(((/     ((((*   .((((*  ,(((((((((((/   ((((((((\n"+
+"(((/  *  *(((     ((((*  ,((((((((((((,  .(((((((\n"+
+"(((/  /.  ((*     ((((*  *(((((((((((((,   ((((((\n"+
+"(((/  //  ,(  .   ((((*  *((((((((((((((/   /((((\n"+
+"(((/  *(*  ,  (   ((((*  *((((((((((((((((   /(((\n"+
+"(((/  ,(/    ,(   /(((*  ,(((((((((((((((((   (((\n"+
+"(((/  .((    ((   /((((  .(((((((((((((((((.  /((\n"+
+"(((/  .((.  .((.  *((((,  *((((((((((((((((   /((\n"+
+"(((/  .((((((((.  *(((((   *((((/,/(((((((/   (((\n"+
+"(((/  .((((((((.  *((((((.        *((   .   .((((\n"+
+"(((((((((((((((/*/((((((((((///(((((((////(((((((\n"+
+"(((((((((((((((((((((((((((((((((((((((((((((((((\n"+              
+     
+"*************************************************");
 
       Main ppal= new Main();
 
@@ -39,6 +58,16 @@
 
    }
 
+   /**
+   * prints on screen the options to use the application <br>
+   * <b> pre: we need the user to choose what action to perform </b> 
+   * @param option menu option
+   * @return the number chosen by the user
+   */
+
+
+    
+
    public int showMenu() {
     int option=0;
 
@@ -51,6 +80,7 @@
      "(5) Create playlist \n"+
      "(6) add songs to playlist \n"+
      "(7) Show playlist \n" +
+     "(8) Rate playlist \n" +
      "(0) Para salir"
      );
     option= lector.nextInt();
@@ -58,8 +88,20 @@
     return option;
   }
 
-  public void executeOperation(int operation) {
+ 
+/**
+   * depending on the option chosen, the program performs an option <br>
+   * <b> pre: we need the value of the option variable </b> 
+   * @param operation menu option
+   * 
+   */
 
+
+
+
+
+  public void executeOperation(int operation) {
+    
     switch(operation) {
      case 0:
      System.out.println("Bye!");
@@ -76,9 +118,7 @@
      createSong();
      break;
      case 4:
-     for (int i=0; i<app.MAX_USERS;i++){
-       System.out.println(app.showPool(i)); 
-     }
+   System.out.println(app.showPool()); 
      break;
      case 5:
      createPlaylist();
@@ -87,14 +127,26 @@
      createSongtoPlaylist();
      break;
      case 7:
-     for (int i=0; i<app.MAX_PLAYLIST;i++){
-       System.out.println(app.showPlaylist(i)); 
-     }
+     System.out.println(app.showPlaylist()); 
+     break;
+      case 8:
+     ratePlaylist();
      break;
      default:
      System.out.println("Error...");
    }
  }
+
+
+  /**
+   * asks the user for the information of the user to be registered <br>
+   * <b> pre: we need the value of the option variable </b> 
+   * @param name user nickname
+   * @param password user password
+   * @param age user age
+   */
+
+
 
 
  public void createUser(){
@@ -111,6 +163,17 @@
 
  }
 
+
+
+/**
+   * asks the user for the information of the song to be registered <br>
+   * <b> pre: we need the value of the option variable </b> 
+   * @param name song name
+   * @param author song artist
+   * @param genre song gnre 
+   * @param duration song duration
+   * @param user name user
+   */
  public void createSong(){
   System.out.println("Enter your nickname");
   String user=lector.nextLine();
@@ -127,6 +190,14 @@
 }
 
 
+  /**
+   * asks the user for the information of the user to be registered <br>
+   * <b> pre: we need the value of the option variable </b> 
+   * @param member playlist private users
+   * @param tittle playlist name
+   * @param members playlist restricted user
+   * 
+   */
 public void createPlaylist(){
   System.out.println("Enter tittle of the playlist");
   String tittle=lector.nextLine();
@@ -160,14 +231,48 @@ public void createPlaylist(){
 
 }
 
+
+/**
+   * ask for the song information and add it to a playlist <br>
+   * <b> pre: we need the value of the option variable </b> 
+   * @param playlist playlist name
+   * @param nickname user nickname(private and restricted)
+   * @param song song name
+   * @param message right or wrong message
+   */
+
+
 public void createSongtoPlaylist(){
   System.out.println("Enter name of the playlist");
   String playlist=lector.nextLine();
+  System.out.println("Enter your nickname");
+  String nickname=lector.nextLine();
   System.out.println("Enter name of the song");
   String song=lector.nextLine();
-  String message=app.addSongtoPlaylist(playlist,song);
+  String message=app.addSongtoPlaylist(playlist,song,nickname);
   System.out.println(message);
 
+}
+
+
+/**
+   * request the rating of any public playlist and add it <br>
+   * <b> pre: existence of the public playlist </b>
+   * @param playlist playlist name
+   * @param calification playlist rating
+   */
+
+public void ratePlaylist(){
+  System.out.println("Enter name of the playlist");
+  String playlist=lector.nextLine();
+  System.out.println("Enter the rate");
+ double calification=lector.nextInt();lector.nextLine();
+ while (calification>5){
+  System.out.println("enter a rate less than or equal to 5");
+  calification=lector.nextInt();lector.nextLine();
+ } 
+  String message=app.addRate(playlist,calification);
+  System.out.println(message);
 }
 
 

@@ -2,7 +2,7 @@ package model;
 public class Playlist{
 
 //Constans
-	public final int MAX_SONGS_PLAYLIST=30;
+	public final int MAX_SONGS_PLAYLIST=10;
  //Attributes
 	private String name;
 	private int duration;
@@ -23,6 +23,13 @@ public class Playlist{
 
 	
  //Constructor 
+	
+/**
+	 * constructor method <br>
+	 * <b> pre: we need the atributes </b> 
+	 * @param name playlist name
+	 */
+
 	public Playlist (String name){
 		this.name=name;
 		this.duration=0;
@@ -33,8 +40,9 @@ public class Playlist{
 	public String totalDuration(){
 		int total=0;
 		for (int i=0;i<MAX_SONGS_PLAYLIST;i++){
-			if (songs_playlist[i] !=null)
+			if (songs_playlist[i] !=null){
 				total+=songs_playlist[i].getDuration();
+			}
 		}
 		int num=0,hor=0,min=0,seg=0;
 		String message="";
@@ -50,10 +58,27 @@ public class Playlist{
 	public String showGenre(){
 		String genres="";
 		for (int i=0;i<MAX_SONGS_PLAYLIST;i++){
-			if (songs_playlist[i] !=null)
+			if (songs_playlist[i] !=null){
 				genres+=((songs_playlist[i].getGenre())+("; "));
+			}
 		}
 		return genres;
 	}
+
+
+	public boolean validateUser(String nickname){
+		boolean validate=true;
+		return validate;
+	}
+
+    public String toString (){
+    		String message=("\n************* Playlist ************ \n"
+				+"** Tittle: "+(name)+"\n"
+				+ "** Genre: "+(showGenre())+"\n"
+				+"** Duration: "+ (totalDuration())
+				+"***********************************");
+    		return message;
+    }
+
 
 }
