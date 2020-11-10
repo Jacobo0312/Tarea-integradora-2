@@ -28,17 +28,17 @@ public class Mcs{
 
 
 
-	public Song findSong (String name){
-		Song objSearch=null;
-		boolean findSo=false;
-		for (int i=0;i<MAX_SONGS && !findSo;i++){
-			if (pool[i]!=null && pool[i].getTittle().equalsIgnoreCase(name)){
-				objSearch=pool[i];
-				findSo=true;	
-			}
+public Song findSong (String name){
+	Song objSearch=null;
+	boolean findSo=false;
+	for (int i=0;i<MAX_SONGS && !findSo;i++){
+		if (pool[i]!=null && pool[i].getTittle().equalsIgnoreCase(name)){
+			objSearch=pool[i];
+			findSo=true;	
 		}
-		return objSearch;
 	}
+	return objSearch;
+}
 
 		/**
 	 * find the user we write <br>
@@ -50,17 +50,17 @@ public class Mcs{
 
 
 
-	public User findUser (String name){
-		User objSearch=null;
-		boolean findUs=false;
-		for (int i=0;i<MAX_USERS && !findUs;i++){
-			if (users[i]!=null && users[i].getName().equalsIgnoreCase(name)){
-				objSearch=users[i];
-				findUs=true;	
+		public User findUser (String name){
+			User objSearch=null;
+			boolean findUs=false;
+			for (int i=0;i<MAX_USERS && !findUs;i++){
+				if (users[i]!=null && users[i].getName().equalsIgnoreCase(name)){
+					objSearch=users[i];
+					findUs=true;	
+				}
 			}
+			return objSearch;
 		}
-		return objSearch;
-	}
 
 
 /**
@@ -71,17 +71,17 @@ public class Mcs{
 	 */
 
 
-	public Playlist findPlaylist(String name){
-		Playlist objSearch=null;
-		boolean findPl=false;
-		for (int i=0;i<MAX_PLAYLIST && !findPl;i++){
-			if (playlist[i]!=null && playlist[i].getName().equalsIgnoreCase(name)){
-				objSearch=playlist[i];
-				findPl=true;
-			}
+public Playlist findPlaylist(String name){
+	Playlist objSearch=null;
+	boolean findPl=false;
+	for (int i=0;i<MAX_PLAYLIST && !findPl;i++){
+		if (playlist[i]!=null && playlist[i].getName().equalsIgnoreCase(name)){
+			objSearch=playlist[i];
+			findPl=true;
 		}
-		return objSearch;
 	}
+	return objSearch;
+}
 
 
 	/**
@@ -126,18 +126,18 @@ public class Mcs{
 	 */
 
 
-	public String addSong (String pName, String pAuthor, int pDuration, String pGenre,String pUser ){
-		User objUser=findUser(pUser);
-		
-		String message="";
-		boolean addSo=false;
-		Song objSearch=findSong(pName);
-		
-         if (objUser == null){
-         	message="this user does not exist";
-         }
-         else{
-          	if(objSearch!=null)
+public String addSong (String pName, String pAuthor, int pDuration, String pGenre,String pUser ){
+	User objUser=findUser(pUser);
+	
+	String message="";
+	boolean addSo=false;
+	Song objSearch=findSong(pName);
+	
+	if (objUser == null){
+		message="this user does not exist";
+	}
+	else{
+		if(objSearch!=null)
 			message="Error. the song already exist";
 		else{
 			objUser.addCounter();
@@ -152,13 +152,13 @@ public class Mcs{
 				message="No more space to add songs";
 		}
 
-         }
+	}
 
 
 
 	
-		return message;
-	}
+	return message;
+}
 
 	/**
 	 * add a new public playlist <br>
@@ -274,8 +274,8 @@ public class Mcs{
 					}
 				}
 				if (addSP==false){
-				message="No more space in playlist";
-			}
+					message="No more space in playlist";
+				}
 			}
 
 		}
@@ -283,7 +283,7 @@ public class Mcs{
 			message=("you don't have access");
 		}
 
-			
+		
 		return message;
 
 	}
@@ -306,41 +306,41 @@ public class Mcs{
 	public String showPool(){
 		String message="";
 		for (int i=0;i<MAX_SONGS;i++){
-		if(pool[i] !=null){
-         message+=pool[i].toString();
+			if(pool[i] !=null){
+				message+=pool[i].toString();
+			}
 		}
-	}
 		return message; 
 	}
 
 	public String showPlaylist(){
 		String message="";
 		for (int i=0;i<MAX_PLAYLIST;i++){
-		if(playlist[i] !=null){
-	      message+=playlist[i].toString();
+			if(playlist[i] !=null){
+				message+=playlist[i].toString();
+			}
 		}
-	}
 		return message; 
 	}
 
-   public String addRate(String name, double calification){
-   	String message="";
-   	Playlist playlist=findPlaylist(name);
-   	if (playlist==null){
-   		message="Don't exist playlist";
-   	}
-   	else{
-   		if (playlist instanceof Public){
-   			Public public_play =(Public)playlist;
-   			message=public_play.ratePlaylist(calification);
-   		
-   		}
-   		else
-   		{
-   			message="The playlist is not public";
-   		}
-   	}
-   	return message;
-   }
+	public String addRate(String name, double calification){
+		String message="";
+		Playlist playlist=findPlaylist(name);
+		if (playlist==null){
+			message="Don't exist playlist";
+		}
+		else{
+			if (playlist instanceof Public){
+				Public public_play =(Public)playlist;
+				message=public_play.ratePlaylist(calification);
+				
+			}
+			else
+			{
+				message="The playlist is not public";
+			}
+		}
+		return message;
+	}
 
 }
